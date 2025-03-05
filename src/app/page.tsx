@@ -54,7 +54,7 @@ export default function Home() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center p-8 bg-gradient-to-b from-purple-900 to-indigo-900 text-white bg-[url('/tarot-background1.jpg')] bg-cover">
+    <main className="flex min-h-screen flex-col items-center p-8 text-white bg-[url('/tarot-background1.jpg')] bg-cover">
       <h1 className="text-4xl font-bold mb-8 text-orange-200">
         Tarot Card Reader
       </h1>
