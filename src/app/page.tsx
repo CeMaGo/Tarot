@@ -3,7 +3,7 @@
 
 import CardComponent from "@/components/Card";
 import { getRandomCard, getThreeCards } from "@/utils/cardUtils";
-import { TarotApiResponse, TarotCard } from "@/types/card";
+import { TarotCard } from "@/types/card";
 import { useState, useEffect } from "react";
 
 export default function Home() {
@@ -43,7 +43,7 @@ export default function Home() {
     setIsLoading(true);
     try {
       const newCards = await getThreeCards();
-      console.log(newCards); // Log the data
+      // console.log(newCards); // Log the data
       setCards(newCards);
       setCard(null); // Clear single card
     } catch (error) {
@@ -59,12 +59,17 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
+      <CardComponent card={card} isLoading={isLoading} />
       {card && <CardComponent card={card} />}
       {cards &&
         cards.length > 0 && ( // Add cards exists check
           <div className="flex">
             {cards.map((card) => (
-              <CardComponent key={card.name_short} card={card} />
+              <CardComponent
+                key={card.name_short}
+                card={card}
+                isLoading={isLoading}
+              />
             ))}
           </div>
         )}

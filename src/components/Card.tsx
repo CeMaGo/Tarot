@@ -4,6 +4,7 @@ import { useState } from "react";
 
 interface CardProps {
   card: TarotCard;
+  isLoading: boolean;
 }
 
 const CardComponent: React.FC<CardProps> = ({ card }) => {
@@ -13,6 +14,18 @@ const CardComponent: React.FC<CardProps> = ({ card }) => {
   const toggleMeanings = () => {
     setShowMeanings(!showMeanings);
   };
+
+  if (isLoading) {
+    return (
+      <div className="max-w-sm rounded overflow-hidden shadow-lg p-4 m-2">
+        Loading...
+      </div>
+    );
+  }
+
+  if (!card) {
+    return null;
+  }
 
   return (
     <div
