@@ -3,16 +3,17 @@
 
 import CardComponent from "@/components/Card";
 import { getRandomCard, getThreeCards } from "@/utils/cardUtils";
-import { TarotApiResponse, TarotCard } from "@/types/card";
+import { TarotCard } from "@/types/card";
 import { useState, useEffect } from "react";
 
 export default function Home() {
   const [card, setCard] = useState<TarotCard | null>(null);
-  const [cards, setCards] = useState<TarotCard[]>([]); // Initialize with an empty array
-  const [isLoading, setIsLoading] = useState(true);
+  const [cards, setCards] = useState<TarotCard[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     async function fetchCard() {
+      setIsLoading(true);
       try {
         const fetchedCard = await getRandomCard();
         setCard(fetchedCard);
@@ -31,7 +32,7 @@ export default function Home() {
     try {
       const newCard = await getRandomCard();
       setCard(newCard);
-      setCards([]); // Clear three-card spread
+      setCards([]);
     } catch (error) {
       console.error("Error drawing card:", error);
     } finally {
@@ -43,9 +44,8 @@ export default function Home() {
     setIsLoading(true);
     try {
       const newCards = await getThreeCards();
-      console.log(newCards); // Log the data
       setCards(newCards);
-      setCard(null); // Clear single card
+      setCard(null);
     } catch (error) {
       console.error("Error drawing three cards:", error);
     } finally {
@@ -53,33 +53,39 @@ export default function Home() {
     }
   };
 
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
-
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      {card && <CardComponent card={card} />}
-      {cards &&
-        cards.length > 0 && ( // Add cards exists check
-          <div className="flex">
-            {cards.map((card) => (
-              <CardComponent key={card.name_short} card={card} />
-            ))}
-          </div>
+    <main className="flex min-h-screen flex-col items-center p-8 bg-gradient-to-b from-purple-900 to-indigo-900 text-white bg-[url('/tarot-background1.jpg')] bg-cover">
+      <h1 className="text-4xl font-bold mb-8 text-orange-200">
+        Tarot Card Reader
+      </h1>
+      <div className="flex flex-wrap justify-center mb-8">
+        {card && cards.length === 0 && (
+          <CardComponent card={card} isLoading={isLoading} />
         )}
-      <button
-        className="bg-sky-900 hover:bg-sky-800 text-white font-bold py-2 px-4 rounded m-2"
-        onClick={handleDrawCard}
-      >
-        Draw Card
-      </button>
-      <button
-        className="bg-emerald-900 hover:bg-emerald-800 text-white font-bold py-2 px-4 rounded m-2"
-        onClick={handleDrawThreeCards}
-      >
-        Draw Three Cards
-      </button>
+        {cards &&
+          cards.length > 0 &&
+          cards.map((card) => (
+            <CardComponent
+              key={card.name_short}
+              card={card}
+              isLoading={isLoading}
+            />
+          ))}
+      </div>
+      <div className="flex justify-center flex-wrap">
+        <button
+          className="bg-cyan-900 hover:bg-cyan-800 text-white font-bold py-2 px-4 rounded m-2"
+          onClick={handleDrawCard}
+        >
+          Draw Card
+        </button>
+        <button
+          className="bg-purple-950 hover:bg-purple-900 text-white font-bold py-2 px-4 rounded m-2"
+          onClick={handleDrawThreeCards}
+        >
+          Draw Three Cards
+        </button>
+      </div>
     </main>
   );
 }
