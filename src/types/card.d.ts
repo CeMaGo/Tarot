@@ -1,9 +1,15 @@
-export interface Card {
+export interface TarotCard {
+  type: string;
+  name_short: string;
   name: string;
-  image: string;
-  uprightMeaning: string;
-  reversedMeaning: string;
-  keywords: string[];
-  number: number;
-  suit: string;
+  value: string;
+  value_int: number;
+  meaning_up: string;
+  meaning_rev: string;
+  desc: string;
+}
+
+export interface TarotApiResponse {
+  nhits: number;
+  cards: TarotCard[];
 }

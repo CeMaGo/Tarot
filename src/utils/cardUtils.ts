@@ -1,13 +1,19 @@
-// src/utils/cardUtils.ts
-import { Card } from "@/types/card"; // Using the alias
+import { TarotCard, TarotApiResponse } from "@/types/card";
 
-export async function getCards(): Promise<Card[]> {
-  const res = await fetch("/data/cards.json");
+export async function getRandomCard(): Promise<TarotCard> {
+  const apiUrl = "https://tarotapi.dev/api/v1/cards/random";
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch cards");
+  try {
+    const response = await fetch(apiUrl);
+
+    if (!response) {
+      throw new Error("HTTP error! status: ${response.status}");
+    }
+
+    const data: TarotApiResponse = await response.json();
+    return data.cards[0];
+  } catch (error) {
+    console.error("Error fetching random card: ", error);
+    throw error;
   }
-
-  const cards: Card[] = await res.json();
-  return cards;
 }
