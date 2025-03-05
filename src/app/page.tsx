@@ -69,13 +69,13 @@ export default function Home() {
           </div>
         )}
       <button
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-2"
+        className="bg-sky-900 hover:bg-sky-800 text-white font-bold py-2 px-4 rounded m-2"
         onClick={handleDrawCard}
       >
         Draw Card
       </button>
       <button
-        className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded m-2"
+        className="bg-emerald-900 hover:bg-emerald-800 text-white font-bold py-2 px-4 rounded m-2"
         onClick={handleDrawThreeCards}
       >
         Draw Three Cards
