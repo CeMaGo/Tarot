@@ -2,12 +2,13 @@
 "use client";
 
 import CardComponent from "@/components/Card";
-import { getRandomCard } from "@/utils/cardUtils";
-import { TarotCard } from "@/types/card";
+import { getRandomCard, getThreeCards } from "@/utils/cardUtils";
+import { TarotApiResponse, TarotCard } from "@/types/card";
 import { useState, useEffect } from "react";
 
 export default function Home() {
   const [card, setCard] = useState<TarotCard | null>(null);
+  const [cards, setCards] = useState<TarotCard[]>([]); // Initialize with an empty array
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -30,25 +31,54 @@ export default function Home() {
     try {
       const newCard = await getRandomCard();
       setCard(newCard);
+      setCards([]); // Clear three-card spread
     } catch (error) {
-      console.error("Error drawing card: ", error);
+      console.error("Error drawing card:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleDrawThreeCards = async () => {
+    setIsLoading(true);
+    try {
+      const newCards = await getThreeCards();
+      console.log(newCards); // Log the data
+      setCards(newCards);
+      setCard(null); // Clear single card
+    } catch (error) {
+      console.error("Error drawing three cards:", error);
     } finally {
       setIsLoading(false);
     }
   };
 
   if (isLoading) {
-    return <p>Loading...</p>; // Or a loading spinner?
+    return <p>Loading...</p>;
   }
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       {card && <CardComponent card={card} />}
+      {cards &&
+        cards.length > 0 && ( // Add cards exists check
+          <div className="flex">
+            {cards.map((card) => (
+              <CardComponent key={card.name_short} card={card} />
+            ))}
+          </div>
+        )}
       <button
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-2"
         onClick={handleDrawCard}
       >
         Draw Card
+      </button>
+      <button
+        className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded m-2"
+        onClick={handleDrawThreeCards}
+      >
+        Draw Three Cards
       </button>
     </main>
   );
