@@ -54,8 +54,10 @@ export default function Home() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center p-8 bg-gradient-to-b from-purple-800 to-indigo-900 text-white bg-[url('/tarot-background.jpg')] bg-cover">
-      <h1 className="text-4xl font-bold mb-8">Tarot Card Reader</h1>
+    <main className="flex min-h-screen flex-col items-center p-8 bg-gradient-to-b from-purple-900 to-indigo-900 text-white bg-[url('/tarot-background1.jpg')] bg-cover">
+      <h1 className="text-4xl font-bold mb-8 text-orange-200">
+        Tarot Card Reader
+      </h1>
       <div className="flex flex-wrap justify-center mb-8">
         {card && cards.length === 0 && (
           <CardComponent card={card} isLoading={isLoading} />
@@ -72,13 +74,13 @@ export default function Home() {
       </div>
       <div className="flex justify-center flex-wrap">
         <button
-          className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-2"
+          className="bg-cyan-900 hover:bg-cyan-800 text-white font-bold py-2 px-4 rounded m-2"
           onClick={handleDrawCard}
         >
           Draw Card
         </button>
         <button
-          className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded m-2"
+          className="bg-purple-950 hover:bg-purple-900 text-white font-bold py-2 px-4 rounded m-2"
           onClick={handleDrawThreeCards}
         >
           Draw Three Cards
