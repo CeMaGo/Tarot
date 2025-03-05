@@ -34,16 +34,16 @@ const CardComponent: React.FC<CardProps> = ({ card, isLoading }) => {
       } text-white`}
     >
       <div className="px-6 py-4">
-        <div className="font-bold text-xl mb-2">{card.name}</div>
+        <div className="font-bold font-serif text-xl mb-2">{card.name}</div>
         <p
           className={`text-sm ${
-            isReversed ? "text-red-400" : "text-green-400"
+            isReversed ? "text-pink-500" : "text-emerald-500"
           }`}
         >
           {isReversed ? "Reversed" : "Upright"}
         </p>
         <button
-          className="text-blue-400 hover:text-blue-300 mt-2"
+          className="text-sky-400 hover:text-sky-300 mt-2"
           onClick={toggleMeanings}
         >
           {showMeanings ? "Hide Meanings" : "Show Meanings"}
