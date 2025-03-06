@@ -1,6 +1,6 @@
 // src/components/Card.tsx
 import { TarotCard } from "@/types/card";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface CardProps {
   card: TarotCard | null;
@@ -10,10 +10,26 @@ interface CardProps {
 const CardComponent: React.FC<CardProps> = ({ card, isLoading }) => {
   const [showMeanings, setShowMeanings] = useState(false);
   const [isReversed, setIsReversed] = useState(Math.random() < 0.5);
+  const [showFront, setShowFront] = useState(false);
+  const [transitionClass, setTransitionClass] = useState("");
 
   const toggleMeanings = () => {
     setShowMeanings(!showMeanings);
   };
+
+  const handleCardClick = () => {
+    if (card && !showFront) {
+      setShowFront(true);
+    }
+  };
+
+  useEffect(() => {
+    if (showFront) {
+      setTransitionClass("transition-transform duration-500 ease-in-out");
+    } else {
+      setTransitionClass("");
+    }
+  }, [showFront]);
 
   if (isLoading) {
     return (
@@ -45,12 +61,14 @@ const CardComponent: React.FC<CardProps> = ({ card, isLoading }) => {
   };
 
   const imageSrc = getImagePath(card);
+  const cardBackSrc = "/images/Cards/card-back.png";
 
   return (
     <div
       className={`max-w-sm rounded overflow-hidden shadow-lg p-4 m-2 ${
         isReversed ? "bg-gray-700" : "bg-gray-800"
       } text-white`}
+      onClick={handleCardClick}
     >
       <div className="px-6 py-4">
         <div className="font-bold font-serif text-xl mb-2">{card.name}</div>
@@ -61,11 +79,17 @@ const CardComponent: React.FC<CardProps> = ({ card, isLoading }) => {
         >
           {isReversed ? "Reversed" : "Upright"}
         </p>
-        <img
-          src={imageSrc}
-          alt={card.name}
-          className="mt-4 w-full bg-opacity-100"
-        />
+        {showFront ? (
+          <img
+            src={imageSrc}
+            alt={card.name}
+            className={`mt-4 w-full opacity-100 transform ${transitionClass} ${
+              isReversed ? "rotate-180" : ""
+            }`}
+          />
+        ) : (
+          <img src={cardBackSrc} alt="Card Back" className="mt-4 w-full" />
+        )}
         <button
           className="text-sky-400 hover:text-sky-300 mt-2"
           onClick={toggleMeanings}
