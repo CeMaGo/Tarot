@@ -4,8 +4,10 @@ import { useState } from "react";
 
 interface CardProps {
   card: TarotCard | null;
-  isLoading: boolean; // Corrected prop type
+  isLoading: boolean;
 }
+
+const imageSrc = "/images/Cards/Major Arcana/01_TheMagician.png";
 
 const CardComponent: React.FC<CardProps> = ({ card, isLoading }) => {
   const [showMeanings, setShowMeanings] = useState(false);
@@ -42,6 +44,8 @@ const CardComponent: React.FC<CardProps> = ({ card, isLoading }) => {
         >
           {isReversed ? "Reversed" : "Upright"}
         </p>
+        <img src={imageSrc} alt={card.name} className="mt-4 w-full" />
+        {/* Card Image */}
         <button
           className="text-sky-400 hover:text-sky-300 mt-2"
           onClick={toggleMeanings}
