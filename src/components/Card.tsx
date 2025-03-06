@@ -5,9 +5,14 @@ import { useState, useEffect } from "react";
 interface CardProps {
   card: TarotCard | null;
   isLoading: boolean;
+  resetCards: boolean;
 }
 
-const CardComponent: React.FC<CardProps> = ({ card, isLoading }) => {
+const CardComponent: React.FC<CardProps> = ({
+  card,
+  isLoading,
+  resetCards,
+}) => {
   const [showMeanings, setShowMeanings] = useState(false);
   const [isReversed, setIsReversed] = useState(Math.random() < 0.5);
   const [showFront, setShowFront] = useState(false);
@@ -30,6 +35,12 @@ const CardComponent: React.FC<CardProps> = ({ card, isLoading }) => {
       setTransitionClass("");
     }
   }, [showFront]);
+
+  useEffect(() => {
+    if (resetCards) {
+      setShowFront(false);
+    }
+  }, [resetCards]);
 
   if (isLoading) {
     return (

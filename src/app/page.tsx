@@ -10,6 +10,7 @@ export default function Home() {
   const [card, setCard] = useState<TarotCard | null>(null);
   const [cards, setCards] = useState<TarotCard[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [resetCards, setResetCards] = useState(false);
 
   useEffect(() => {
     async function fetchCard() {
@@ -29,6 +30,7 @@ export default function Home() {
 
   const handleDrawCard = async () => {
     setIsLoading(true);
+    setResetCards(true);
     try {
       const newCard = await getRandomCard();
       setCard(newCard);
@@ -37,11 +39,13 @@ export default function Home() {
       console.error("Error drawing card:", error);
     } finally {
       setIsLoading(false);
+      setResetCards(false);
     }
   };
 
   const handleDrawThreeCards = async () => {
     setIsLoading(true);
+    setResetCards(true);
     try {
       const newCards = await getThreeCards();
       setCards(newCards);
@@ -50,6 +54,7 @@ export default function Home() {
       console.error("Error drawing three cards:", error);
     } finally {
       setIsLoading(false);
+      setResetCards(false);
     }
   };
 
@@ -60,15 +65,20 @@ export default function Home() {
       </h1>
       <div className="flex flex-wrap justify-center mb-8 opacity-75">
         {card && cards.length === 0 && (
-          <CardComponent card={card} isLoading={isLoading} />
+          <CardComponent
+            card={card}
+            isLoading={isLoading}
+            resetCards={resetCards}
+          />
         )}
         {cards &&
           cards.length > 0 &&
-          cards.map((card) => (
+          cards.map((cardItem) => (
             <CardComponent
-              key={card.name_short}
-              card={card}
+              key={cardItem.name_short}
+              card={cardItem}
               isLoading={isLoading}
+              resetCards={resetCards}
             />
           ))}
       </div>
