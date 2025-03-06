@@ -1,6 +1,7 @@
 // src/components/Card.tsx
 import { TarotCard } from "@/types/card";
 import { useState, useEffect } from "react";
+import Loading from "./Loading";
 
 interface CardProps {
   card: TarotCard | null;
@@ -44,8 +45,10 @@ const CardComponent: React.FC<CardProps> = ({
 
   if (isLoading) {
     return (
-      <div className="max-w-sm rounded overflow-hidden shadow-lg p-4 m-2 bg-gray-800 text-white">
-        Loading...
+      <div
+        className={`max-w-sm rounded overflow-hidden shadow-lg p-4 m-2 bg=gray-800 text-white`}
+      >
+        <Loading />
       </div>
     );
   }
@@ -82,41 +85,41 @@ const CardComponent: React.FC<CardProps> = ({
       onClick={handleCardClick}
     >
       <div className="px-6 py-4">
-        <div className="font-bold font-serif text-xl mb-2">{card.name}</div>
-        <p
-          className={`text-sm ${
-            isReversed ? "text-pink-500" : "text-emerald-500"
-          }`}
-        >
-          {isReversed ? "Reversed" : "Upright"}
-        </p>
         {showFront ? (
-          <img
-            src={imageSrc}
-            alt={card.name}
-            className={`mt-4 w-full opacity-100 transform ${transitionClass} ${
-              isReversed ? "rotate-180" : ""
-            }`}
-          />
+          <>
+            <div className="font-bold font-serif text-xl mb-2">{card.name}</div>
+            <p
+              className={`text-sm ${
+                isReversed ? "text-pink-500" : "text-emerald-500"
+              }`}
+            >
+              {isReversed ? "Reversed" : "Upright"}
+            </p>
+            <img
+              src={imageSrc}
+              alt={card.name}
+              className={`mt-4 w-full opacity-100 transform ${transitionClass} ${
+                isReversed ? "rotate-180" : ""
+              }`}
+            />
+            <button
+              className="text-sky-400 hover:text-sky-300 mt-2"
+              onClick={toggleMeanings}
+            >
+              {showMeanings ? "Hide Meanings" : "Show Meanings"}
+            </button>
+            {showMeanings && (
+              <div>
+                <p className="text-gray-300 text-base mt-2">
+                  <strong>{isReversed ? "Reversed:" : "Upright:"}</strong>{" "}
+                  {isReversed ? card.meaning_rev : card.meaning_up}
+                </p>
+                <p className="text-gray-300 text-base mt-2">{card.desc}</p>
+              </div>
+            )}
+          </>
         ) : (
           <img src={cardBackSrc} alt="Card Back" className="mt-4 w-full" />
-        )}
-        <button
-          className="text-sky-400 hover:text-sky-300 mt-2"
-          onClick={toggleMeanings}
-        >
-          {showMeanings ? "Hide Meanings" : "Show Meanings"}
-        </button>
-        {showMeanings && (
-          <div>
-            <p className="text-gray-300 text-base mt-2">
-              <strong>Upright:</strong> {card.meaning_up}
-            </p>
-            <p className="text-gray-300 text-base mt-2">
-              <strong>Reversed:</strong> {card.meaning_rev}
-            </p>
-            <p className="text-gray-300 text-base mt-2">{card.desc}</p>
-          </div>
         )}
       </div>
     </div>

@@ -5,6 +5,7 @@ import CardComponent from "@/components/Card";
 import { getRandomCard, getThreeCards } from "@/utils/cardUtils";
 import { TarotCard } from "@/types/card";
 import { useState, useEffect } from "react";
+import Loading from "@/components/Loading";
 
 export default function Home() {
   const [card, setCard] = useState<TarotCard | null>(null);
@@ -57,6 +58,14 @@ export default function Home() {
       setResetCards(false);
     }
   };
+
+  if (isLoading) {
+    return (
+      <main className="flex min-h-screen flex-col items-center p-8 text-white bg-[url('/tarot-background1.jpg')] bg-cover">
+        <Loading />
+      </main>
+    );
+  }
 
   return (
     <main className="flex min-h-screen flex-col items-center p-8 text-white bg-[url('/tarot-background1.jpg')] bg-cover">
