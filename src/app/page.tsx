@@ -7,6 +7,7 @@ import { TarotCard } from "@/types/card";
 import { useState, useEffect } from "react";
 import Loading from "@/components/Loading";
 import ThreeCardSpread from "@/components/ThreeCardSpread";
+import CelticCrossSpread from "@/components/CelticCrossSpread";
 
 export default function Home() {
   const [card, setCard] = useState<TarotCard | null>(null);
@@ -14,6 +15,7 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(false);
   const [resetCards, setResetCards] = useState(false);
   const [showThreeCardSpread, setShowThreeCardSpread] = useState(false);
+  const [showCelticCrossSpread, setShowCelticCrossSpread] = useState(false);
 
   useEffect(() => {
     async function fetchCard() {
@@ -39,6 +41,7 @@ export default function Home() {
       setCard(newCard);
       setCards([]);
       setShowThreeCardSpread(false);
+      setShowCelticCrossSpread(false);
     } catch (error) {
       console.error("Error drawing card:", error);
     } finally {
@@ -55,6 +58,7 @@ export default function Home() {
       setCards(newCards);
       setCard(null);
       setShowThreeCardSpread(false);
+      setShowCelticCrossSpread(false);
     } catch (error) {
       console.error("Error drawing three cards:", error);
     } finally {
@@ -71,6 +75,7 @@ export default function Home() {
       setCards(newCards);
       setCard(null);
       setShowThreeCardSpread(true);
+      setShowCelticCrossSpread(false);
     } catch (error) {
       console.error("Error drawing three card spread:", error);
     } finally {
@@ -78,6 +83,33 @@ export default function Home() {
       setResetCards(false);
     }
   };
+
+  const handleDrawCelticCrossSpread = async () => {
+    setIsLoading(true);
+    setResetCards(true);
+    try {
+      const newCards = await getTenCards(); // Implement this function
+      setCards(newCards);
+      setCard(null);
+      setShowThreeCardSpread(false);
+      setShowCelticCrossSpread(true);
+    } catch (error) {
+      console.error("Error drawing Celtic Cross Spread:", error);
+    } finally {
+      setIsLoading(false);
+      setResetCards(false);
+    }
+  };
+
+  const getTenCards = async () => {
+    const tenCards: TarotCard[] = [];
+    for (let i = 0; i < 10; i++) {
+      const card = await getRandomCard();
+      tenCards.push(card);
+    }
+    return tenCards;
+  };
+
   if (isLoading) {
     return (
       <main className="flex min-h-screen flex-col items-center p-8 text-white bg-[url('/tarot-background1.jpg')] bg-cover">
@@ -134,6 +166,18 @@ export default function Home() {
           onClick={handleDrawThreeCardSpread}
         >
           Three Card Spread
+        </button>
+        {/* <button
+          className="bg-red-900 hove:bg-red-800 text-white font-bold py-2 px-4 rounded m-2 opacity-85"
+          onClick={handleDrawThreeCardSpread}
+        >
+          Celtic Cross Spread
+        </button>         */}
+        <button
+          className="bg-red-800 hover:bg-red-700 text-white font-bold py-2 px-4 rounded m-2 opacity-85"
+          onClick={handleDrawCelticCrossSpread}
+        >
+          Celtic Cross Spread
         </button>
       </div>
     </main>

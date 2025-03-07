@@ -34,3 +34,5 @@ const CelticCrossSpread: React.FC<CelticCrossSpreadProps> = ({
     </div>
   );
 };
+
+export default CelticCrossSpread;
