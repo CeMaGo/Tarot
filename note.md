@@ -1,55 +1,81 @@
-<!-- Here Goes the scribbles  -->
+Example Data (Major Arcana - First Few Cards):
 
-page.tsx Changes:
+JSON
 
-Background Image:
-bg-[url('/tarot-background1.jpg')] bg-cover
-Title Styles:
-text-4xl font-serif font-bold mb-8 text-orange-200
-Card Container Opacity:
-opacity-75
-Button Styles:
-bg-cyan-900 hover:bg-cyan-800 opacity-75 (Draw Card)
-bg-purple-950 hover:bg-purple-900 opacity-85 (Draw Three Cards)
-CardComponent.tsx Changes:
+[
+{
+"name_short": "ar01",
+"name": "The Magician",
+"value": "1",
+"value_int": 1,
+"meanings": {
+"general": "Manifestation, skill, resourcefulness, power.",
+"love": "Attraction, new beginnings, charm, confidence.",
+"career": "Using skills, taking initiative, achieving goals."
+},
+"keywords": ["Willpower", "Action", "Creation", "Potential"],
+"Numerology": "1",
+"element": "Air",
+"meaning_up": "Skill, diplomacy, address, subtlety; self-confidence, will.",
+"meaning_rev": "Mental disease, disgrace, disquiet, lack of planning.",
+"desc": "A youthful figure in the robe of a magician..."
+},
+{
+"name_short": "ar02",
+"name": "The High Priestess",
+"value": "2",
+"value_int": 2,
+"meanings": {
+"general": "Intuition, secrets, mystery, subconscious knowledge.",
+"love": "Trusting intuition, hidden feelings, waiting, psychic connection.",
+"career": "Inner wisdom, relying on instincts, hidden information."
+},
+"keywords": ["Intuition", "Secrets", "Mystery", "Subconscious"],
+"Numerology": "2",
+"element": "Water",
+"meaning_up": "Secrets, mystery, the future as yet unrevealed; silence, tenacity; mystery, wisdom, science.",
+"meaning_rev": "Conceit, surface knowledge, repressed feelings, lack of intuition.",
+"desc": "She has the lunar crescent at her feet..."
+},
+{
+"name_short": "ar03",
+"name": "The Empress",
+"value": "3",
+"value_int": 3,
+"meanings": {
+"general": "Fertility, abundance, nurturing, creativity, beauty.",
+"love": "Motherly love, nurturing relationships, sensuality, fertility.",
+"career": "Creative projects, growth, abundance, nurturing work environments."
+},
+"keywords": ["Nurturing", "Creativity", "Abundance", "Nature"],
+"Numerology": "3",
+"element": "Earth",
+"meaning_up": "Fruitfulness, action, initiative, length of days; the unknown, clandestine; also difficulty, doubt, ignorance.",
+"meaning_rev": "Vacillation, smothering, lack of personal growth, dependence.",
+"desc": "A stately figure, seated, having rich vestments and royal aspect..."
+}
+]
+How to Complete the Dataset:
 
-Reversed Card Background:
-bg-gray-700 (Reversed)
-bg-gray-800 (Upright)
-Upright/Reversed Text Color:
-text-pink-500 (Reversed)
-text-emerald-500 (Upright)
-Card Name Font:
-font-bold font-serif text-xl mb-2
-Show/Hide Meanings Button:
-text-sky-400 hover:text-sky-300 mt-2
-Meaning Text Color:
-text-gray-300 text-base mt-2
+Major Arcana (ar01-ar22):
+Use tarot resources to find the keywords, numerology, element, general, love, and career meanings for each card.
+Minor Arcana (Cups, Wands, Swords, Pentacles - 56 cards):
+Suits:
+Cups: Emotions, relationships, feelings.
+Wands: Action, energy, creativity, passion.
+Swords: Intellect, thoughts, challenges, communication.
+Pentacles: Material world, finances, stability, practicality.
+Numbers:
+Ace to Ten: Each number has a general meaning that applies across suits.
+Court Cards (Page, Knight, Queen, King): Represent personalities and roles.
+Resources:
+Reliable tarot websites and books.
+Tarot communities and forums.
+Tips:
 
-<!-- Next Steps:  -->
-
-**Next** Steps:
-
-Now that we have the base styling in place, what would you like to work on next? Here are some suggested improvements:
-
-**Card** Images:
-
-- Add actual card images to the CardComponent.
-- More Card Spreads:
-- Implement more complex card spreads, such as the Celtic Cross spread.
-
-**Animations**:
-
-- Add animations to the card drawing or card revealing process.
-
-  **Accessibility**:
-
-- Ensure the app is accessible to users with disabilities.
-  **Responsive** Design Refinements:
-- Fine-tune the responsive behavior of the app for different screen sizes.
-- **Add** a card back image:
-- Add a card back image, and only show the card front image once the card is drawn.
-  **Add** a shuffle animation:
-- Add a shuffle button, and a shuffle animation.
-  **Add** a way to save readings:
-- Add a way to save the readings.
+Be consistent in your interpretations.
+Consider the traditional meanings and your own intuition.
+Use clear and concise language.
+Divide the task, it is very large.
+Once you have the data, validate it using a json validator.
+Completing this dataset will take time and effort, but it will create a valuable resource for your application.

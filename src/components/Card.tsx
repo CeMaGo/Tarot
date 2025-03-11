@@ -4,8 +4,8 @@ import { useState, useEffect } from "react";
 import Loading from "./Loading";
 
 interface CardProps {
-  card: TarotCard | null;
-  isLoading: boolean;
+  card: TarotCard | null
+  isLoading: boolean; // Corrected prop type
   resetCards: boolean;
 }
 
