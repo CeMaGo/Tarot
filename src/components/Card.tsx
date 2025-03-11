@@ -5,6 +5,7 @@ import { useState } from "react";
 interface CardProps {
   card: TarotCard | null;
   isLoading: boolean; // Corrected prop type
+  resetCards: boolean;
 }
 
 const CardComponent: React.FC<CardProps> = ({ card, isLoading }) => {
