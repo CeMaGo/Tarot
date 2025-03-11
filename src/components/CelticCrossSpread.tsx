@@ -1,38 +1,40 @@
-import { TarotCard } from "@/types/card";
-import CardComponent from "./Card";
+//Work on Later, for no benched!!
 
-interface CelticCrossSpreadProps {
-  cards: TarotCard[];
-  isLoading: boolean;
-}
+// import { TarotCard } from "@/types/card";
+// import CardComponent from "./Card";
 
-const CelticCrossSpread: React.FC<CelticCrossSpreadProps> = ({
-  cards,
-  isLoading,
-}) => {
-  const positions = [
-    "The Present",
-    "The Challenge",
-    "The Past",
-    "The Future",
-    "Above (Conscious)",
-    "Below (Subconscious)",
-    "You",
-    "Environment",
-    "Hopes/Fears",
-    "Outcome",
-  ];
+// interface CelticCrossSpreadProps {
+//   cards: TarotCard[];
+//   isLoading: boolean;
+// }
 
-  return (
-    <div className="grid grid-col-5 gap-4">
-      {cards.map((card, index) => (
-        <div key={card.name_short} className="text-center">
-          <h3 className="text-xl font-bold mb-2">{positions[index]}</h3>
-          <CardComponent card={card} isLoading={isLoading} resetCards={false} />
-        </div>
-      ))}
-    </div>
-  );
-};
+// const CelticCrossSpread: React.FC<CelticCrossSpreadProps> = ({
+//   cards,
+//   isLoading,
+// }) => {
+//   const positions = [
+//     "The Present",
+//     "The Challenge",
+//     "The Past",
+//     "The Future",
+//     "Above (Conscious)",
+//     "Below (Subconscious)",
+//     "You",
+//     "Environment",
+//     "Hopes/Fears",
+//     "Outcome",
+//   ];
 
-export default CelticCrossSpread;
+//   return (
+//     <div className="grid grid-col-5 gap-4">
+//       {cards.map((card, index) => (
+//         <div key={card.name_short} className="text-center">
+//           <h3 className="text-xl font-bold mb-2">{positions[index]}</h3>
+//           <CardComponent card={card} isLoading={isLoading} resetCards={false} />
+//         </div>
+//       ))}
+//     </div>
+//   );
+// };
+
+// export default CelticCrossSpread;

@@ -50,23 +50,6 @@ export default function Home() {
     }
   };
 
-  const handleDrawThreeCards = async () => {
-    setIsLoading(true);
-    setResetCards(true);
-    try {
-      const newCards = await getThreeCards();
-      setCards(newCards);
-      setCard(null);
-      setShowThreeCardSpread(false);
-      setShowCelticCrossSpread(false);
-    } catch (error) {
-      console.error("Error drawing three cards:", error);
-    } finally {
-      setIsLoading(false);
-      setResetCards(false);
-    }
-  };
-
   const handleDrawThreeCardSpread = async () => {
     setIsLoading(true);
     setResetCards(true);
@@ -156,28 +139,10 @@ export default function Home() {
           Draw Card
         </button>
         <button
-          className="bg-purple-950 hover:bg-purple-900 text-white font-bold py-2 px-4 rounded m-2 opacity-85"
-          onClick={handleDrawThreeCards}
-        >
-          Draw Three Cards
-        </button>
-        <button
           className="bg-orange-600 hover:bg-orange-500 text-white font-bold py-2 px-4 rounded m-2 opacity-85"
           onClick={handleDrawThreeCardSpread}
         >
           Three Card Spread
-        </button>
-        {/* <button
-          className="bg-red-900 hove:bg-red-800 text-white font-bold py-2 px-4 rounded m-2 opacity-85"
-          onClick={handleDrawThreeCardSpread}
-        >
-          Celtic Cross Spread
-        </button>         */}
-        <button
-          className="bg-red-800 hover:bg-red-700 text-white font-bold py-2 px-4 rounded m-2 opacity-85"
-          onClick={handleDrawCelticCrossSpread}
-        >
-          Celtic Cross Spread
         </button>
       </div>
     </main>
