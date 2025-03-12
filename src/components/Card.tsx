@@ -1,4 +1,3 @@
-// src/components/Card.tsx
 import { TarotCard } from "@/types/card";
 import { useState } from "react";
 
@@ -41,6 +40,13 @@ const CardComponent: React.FC<CardProps> = ({ card, isLoading }) => {
             isReversed ? "text-pink-500" : "text-emerald-500"
           }`}
         >
+          <img
+            src={card.image}
+            alt={card.name}
+            style={{
+              transform: isReversed ? "rotate(180deg)" : "rotate(0deg)",
+            }}
+          />
           {isReversed ? "Reversed" : "Upright"}
         </p>
         <button

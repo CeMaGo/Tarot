@@ -1,53 +1,37 @@
-import { TarotCard, TarotApiResponse } from "@/types/card";
+import { TarotCard } from "@/types/card";
+import { getThreeCards } from "@/utils/cardUtils";
 import { error, log } from "console";
 
+/// ---------------------->> NEW BEGINNINGS <<------------------------\\
+
 export async function getRandomCard(): Promise<TarotCard> {
-  const apiUrl = "https://tarotapi.dev/api/v1/cards/random";
-
   try {
-    const response = await fetch(apiUrl);
-
+    const response = await fetch("/interpretations.json");
     if (!response) {
       throw new Error("HTTP error! status: ${response.status}");
     }
 
-    const data: TarotApiResponse = await response.json();
+    const data = await response.json();
     return data.cards[0];
   } catch (error) {
     console.error("Error fetching random card: ", error);
     throw error;
   }
 }
-
-export async function getThreeCards(): Promise<TarotCard[]> {
-  const apiUrl = "https://tarotapi.dev/api/v1/cards/random?n=3";
-
-  console.log("Fetching from:", apiUrl);
-
+export async function getThreeRandomCards(): Promise<TarotCard[]> {
   try {
-    const response = await fetch(apiUrl);
-
-    console.log("Response:", response);
-
+    console.log("start fetch");
+    const response = await fetch("/interpretations.json");
     if (!response.ok) {
-      console.error(`API Error: ${response.status} - ${response.statusText}`);
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-
-    const data: TarotApiResponse = await response.json();
-
-    console.log("Parsed Data:", data);
-
-    if (!data || !data.cards || !Array.isArray(data.cards)) {
-      console.error("Invalid API response structure");
-      return [];
-    }
-
-    console.log("Cards:", data.cards);
-
-    return data.cards; // Ensure the data is returned
+    const data = await response.json();
+    console.log("data in fetch: ", data);
+    const shuffledCards = data.sort(() => 0.5 - Math.random());
+    console.log("Shuffle:", shuffledCards.slice(0, 3));
+    return shuffledCards.slice(0, 3);
   } catch (error) {
-    console.error("Error fetching three cards:", error);
+    console.error("Error fetching three cards from JSON:", error);
     return [];
   }
 }
