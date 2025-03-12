@@ -11,10 +11,10 @@ const ThreeCardSpread: React.FC<ThreeCardSpreadProps> = ({
   isLoading,
 }) => {
   return (
-    <div className="flex justify-center items-center">
+    <div className="flex justify-center items-start">
       {cards.map((card, index) => (
         <div key={card.name_short} className="m-4">
-          <h3 className="text-xl font-bold mb-2">
+          <h3 className="text-xl font-bold mb-2 text-cyan-100">
             {index === 0 ? "Past" : index === 1 ? "Present" : "Future"}
           </h3>
           <CardComponent card={card} isLoading={isLoading} resetCards={false} />

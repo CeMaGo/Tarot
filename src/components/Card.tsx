@@ -34,10 +34,12 @@ const CardComponent: React.FC<CardProps> = ({ card, isLoading }) => {
       } text-white`}
     >
       <div className="px-6 py-4">
-        <div className="font-bold font-serif text-xl mb-2">{card.name}</div>
+        <div className="font-bold font-serif text-xl text-fuchsia-600 mb-2">
+          {card.name}
+        </div>
         <p
           className={`text-sm ${
-            isReversed ? "text-pink-500" : "text-emerald-500"
+            isReversed ? "text-rose-600" : "text-emerald-500"
           }`}
         >
           <img
